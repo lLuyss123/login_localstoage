@@ -1,11 +1,20 @@
-import initForm from "../../form.js";
-export const store = {
-  user:null,
-  isLoged:false,
+const dataUser = {
+  id: 1,
+  firstName: "abrahan",
+  lastName: "villa",
+  role: "team leader",
+  email: "abrahan.villa@riwi.io",
+  password: "123456",
+};
 
-  onLogin(email, password, dataUsers) {
-    if (email === dataUsers.email && password === dataUsers.password) {
-      ((this.user = dataUsers), (this.isLoged = true));
+export const store = {
+  user: null,
+  isLoged: false,
+
+  onLogin(email, password) {
+    if (email === dataUser.email && password === dataUser.password) {
+      this.user = dataUser;
+      this.isLoged = true;
       this.saveData(this.user);
     }
   },
@@ -17,20 +26,19 @@ export const store = {
 
   loadData() {
     const data = JSON.parse(localStorage.getItem("user"));
-    console.log(data);
-    
+
     if (data === null) {
       this.isLoged = false;
       this.user = null;
-    }else{
+    } else {
       this.user = data;
-      this.isLoged = true; 
+      this.isLoged = true;
     }
   },
 
-  onLogout(dataUsers){
-    const app = document.getElementById("app")
-    localStorage.removeItem("user")
-    initForm(app,this,dataUsers)
-  }
+    onLogout() {
+    localStorage.removeItem("user");
+    this.user = null;
+    this.isLoged = false;
+  },
 };
