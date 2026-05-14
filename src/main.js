@@ -6,7 +6,6 @@ import getLoginForm from "../form.js";
 const app = getElementById("app");
 
 store.loadData();
-renderApp();
 
 function renderApp() {
   if (store.isLoged) {
@@ -15,6 +14,8 @@ function renderApp() {
     renderLogin();
   }
 }
+
+renderApp();
 
 function renderWelcome() {
   app.innerHTML = `
